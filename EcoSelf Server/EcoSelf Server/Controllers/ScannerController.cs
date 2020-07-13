@@ -10,7 +10,7 @@ namespace EcoSelf_Server.Controllers
     {
         public IActionResult Index()
         {
-           return Content(User.Identity.Name);
+            return Content(User.Identity.Name);
         }
     }
 }
