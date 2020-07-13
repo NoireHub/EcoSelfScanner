@@ -36,7 +36,7 @@ namespace EcoSelf_Server.Controllers
                 {
                     await Authenticate(model.Email); // аутентификация
 
-                    return Redirect("/home/index");
+                    return Redirect("/Admin/index");
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }
@@ -62,7 +62,7 @@ namespace EcoSelf_Server.Controllers
 
                     await Authenticate(model.Email); // аутентификация
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Scanner");
                 }
                 else
                     ModelState.AddModelError("", "Некорректные логин и(или) пароль");
@@ -70,6 +70,15 @@ namespace EcoSelf_Server.Controllers
             return View(model);
         }
 
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+        public IActionResult Add()
+        {
+            return View();
+        }
         private async Task Authenticate(string userName)
         {
             // создаем один claim
@@ -83,10 +92,10 @@ namespace EcoSelf_Server.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
-        public async Task<IActionResult> Logout()
+       /* public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Account");
-        }
+            return RedirectToAction("Login", "Scanner");
+        }*/
     }
 }
