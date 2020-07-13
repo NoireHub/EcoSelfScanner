@@ -8,9 +8,19 @@ namespace EcoSelf_Server.Controllers
 {
     public class ScannerController : Controller
     {
-        public IActionResult Index()
+
+        public IActionResult GetBarCode(int id)
         {
-            return Content(User.Identity.Name);
+           return Content(User.Identity.Name);
         }
+
+        public JsonResult SendNudes(int id)
+        {
+            string name = "[eq {id}"+ id;
+            return Json(name) ;
+        }
+
+
+
     }
 }

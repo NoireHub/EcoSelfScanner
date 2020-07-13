@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using EcoSelf_Server.ViewModels;
 using EcoSelf_Server.Data.Models;
+using Microsoft.AspNetCore.Routing;
 
 namespace EcoSelf_Server.Controllers
 {
@@ -35,7 +36,7 @@ namespace EcoSelf_Server.Controllers
                 {
                     await Authenticate(model.Email); // аутентификация
 
-                    return RedirectToAction("Index", "Scanner");
+                    return Redirect("/home/index");
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }

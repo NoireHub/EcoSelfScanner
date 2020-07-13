@@ -37,6 +37,7 @@ namespace EcoSelf_Server
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Admin/Index");
                 });
             services.AddControllersWithViews();
+            services.AddMvc();
         }
 
         public void Configure(IApplicationBuilder app)

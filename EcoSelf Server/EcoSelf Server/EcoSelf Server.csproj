@@ -6,7 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <Compile Remove="Data\Interfaces\**" />
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="Data\Interfaces\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="Data\Interfaces\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="Data\Interfaces\**" />
+    <None Remove="wwwroot\**" />
   </ItemGroup>
 
   <ItemGroup>
