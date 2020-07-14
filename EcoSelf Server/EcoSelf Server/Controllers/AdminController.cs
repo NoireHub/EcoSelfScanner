@@ -8,15 +8,15 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using EcoSelf_Server.ViewModels;
-using EcoSelf_Server.Data.Models;
+using EcoSelf_Server.Models;
 using Microsoft.AspNetCore.Routing;
 
 namespace EcoSelf_Server.Controllers
 {
     public class AdminController : Controller
     {
-        private UserContext db;
-        public AdminController(UserContext context)
+        private ServerDBContex db;
+        public AdminController(ServerDBContex context)
         {
             db = context;
         }
@@ -36,7 +36,7 @@ namespace EcoSelf_Server.Controllers
                 {
                     await Authenticate(model.Email); // аутентификация
 
-                    return Redirect("/Admin/index");
+                    return Redirect("/home/index");
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }

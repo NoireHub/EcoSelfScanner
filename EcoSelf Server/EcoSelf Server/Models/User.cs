@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EcoSelf_Server.Data.Models
+namespace EcoSelf_Server.Models
 {
     public class User
     {

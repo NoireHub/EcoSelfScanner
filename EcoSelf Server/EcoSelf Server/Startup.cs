@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EcoSelf_Server.Data.Models;
+using EcoSelf_Server.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,7 +28,7 @@ namespace EcoSelf_Server
         public void ConfigureServices(IServiceCollection services)
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<UserContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<ServerDBContex>(options => options.UseSqlServer(connection));
 
             // установка конфигурации подключения
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
