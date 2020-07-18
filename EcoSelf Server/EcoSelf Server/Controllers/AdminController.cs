@@ -69,11 +69,13 @@ namespace EcoSelf_Server.Controllers
             }
             return View(model);
         }
-
-
-        public IActionResult Index()
+        /*public IActionResult Index()
         {
             return View();
+        }*/
+        public async Task<IActionResult> Index()
+        {
+            return View(await db.Products.ToListAsync());
         }
         public IActionResult Add()
         {
@@ -86,13 +88,54 @@ namespace EcoSelf_Server.Controllers
             await db.SaveChangesAsync();
             return View();
         }
-        public IActionResult Edit()
+        public async Task<IActionResult> EditAsync(int? Id)
         {
-            return View();
+            if (Id != null)
+            {
+                Product product = await db.Products.FirstOrDefaultAsync(p => p.Id == Id);
+                if (product != null)
+                    return View(product);
+            }
+            return NotFound();
         }
-        public IActionResult Delete()
+        [HttpPost]
+        public async Task<IActionResult> Edit(Product product)
         {
-            return View();
+            db.Products.Update(product);
+            await db.SaveChangesAsync();
+            return RedirectToAction("edit");
+        }
+        /* public IActionResult Delete()
+         {
+             return View();
+         }*/
+        [HttpGet]
+        [ActionName("Delete")]
+        public async Task<IActionResult> ConfirmDelete(int? id)
+        {
+            if (id != null)
+            {
+                Product product = await db.Products.FirstOrDefaultAsync(p => p.Id == id);
+                if (product != null)
+                    return View(product);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id != null)
+            {
+                Product product = await db.Products.FirstOrDefaultAsync(p => p.Id == id);
+                if (product != null)
+                {
+                    db.Products.Remove(product);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            return NotFound();
         }
         /*   public async Task<IActionResult> Add(AddModel model)
            {

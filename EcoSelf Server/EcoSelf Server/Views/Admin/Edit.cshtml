@@ -1,17 +1,28 @@
-﻿@model EcoSelf_Server.ViewModels.EditModel
+﻿@model EcoSelf_Server.Models.Product
 
 <h2>Форма редактирования</h2>
 
-<form asp-action="Edit" asp-controller="Admin" asp-anti-forgery="true">
-    <div class="validation" asp-validation-summary="ModelOnly"></div>
-    <div>
-        <div class="form-group">
-            <label asp-for="Id">Номер ID</label>
-            <input type="text" asp-for="Id" />
-            <span asp-validation-for="Id" />
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Ввод" class="btn btn-outline-dark" />
-        </div>
+@{
+    ViewBag.Title = "Редактирование пользователя";
+}
+<form asp-action="Edit" asp-controller="Admin" asp-route-id="@Model.Id">
+    <div class="form-group">
+        <label asp-for="BarCode" class="control-label">BarCode</label>
+        <input type="text" asp-for="BarCode" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Name</label>
+        <input type="text" asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="RecycMatr" class="control-label">RecycMatr</label>
+        <input type="text" asp-for="RecycMatr" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Desc" class="control-label">Desc</label>
+        <input type="text" asp-for="Desc" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Сохранить" class="btn btn-default" />
     </div>
 </form>

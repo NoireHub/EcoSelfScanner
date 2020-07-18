@@ -8,7 +8,7 @@ namespace EcoSelf_Server.Models
 {
     public class Product
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string BarCode { get; set; } 
         public string Name { get; set; }
         public string RecycMatr { get; set; }
