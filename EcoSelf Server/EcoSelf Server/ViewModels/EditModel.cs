@@ -6,11 +6,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EcoSelf_Server.ViewModels
 {
-    public class AddModel
+    public class EditModel
     {
-        public string BarCode { get; set; } 
-        public string Name { get; set; }
-        public string RecycMatr { get; set; }
-        public string Desc { get; set; }
+        [Required(ErrorMessage = "Не указан id")]
+        public int Id { get; set; }
     }
 }

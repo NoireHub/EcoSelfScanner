@@ -36,7 +36,7 @@ namespace EcoSelf_Server.Controllers
                 {
                     await Authenticate(model.Email); // аутентификация
 
-                    return Redirect("/home/index");
+                    return Redirect("/Admin/index");
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }
@@ -79,6 +79,42 @@ namespace EcoSelf_Server.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> AddAsync(Product product)
+        {
+            db.Products.Add(product);
+            await db.SaveChangesAsync();
+            return View();
+        }
+        public IActionResult Edit()
+        {
+            return View();
+        }
+        public IActionResult Delete()
+        {
+            return View();
+        }
+        /*   public async Task<IActionResult> Add(AddModel model)
+           {
+               if (ModelState.IsValid)
+               {
+                   User user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+                   if (user == null)
+                   {
+                       // добавляем пользователя в бд
+                       db.Users.Add(new User { Email = model.Email, Password = model.Password });
+                       await db.SaveChangesAsync();
+
+                       await Authenticate(model.Email); // аутентификация
+
+                       return RedirectToAction("Index", "Scanner");
+                   }
+                   else
+                       ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+               }
+               return View(model);
+           }*/
+
         private async Task Authenticate(string userName)
         {
             // создаем один claim
@@ -92,10 +128,12 @@ namespace EcoSelf_Server.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
-       /* public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Scanner");
-        }*/
+        /* public async Task<IActionResult> Logout()
+         {
+             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+             return RedirectToAction("Login", "Scanner");
+         }*/
+
+   
     }
 }

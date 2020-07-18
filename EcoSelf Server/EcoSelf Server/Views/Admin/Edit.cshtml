@@ -1,0 +1,17 @@
+﻿@model EcoSelf_Server.ViewModels.EditModel
+
+<h2>Форма редактирования</h2>
+
+<form asp-action="Edit" asp-controller="Admin" asp-anti-forgery="true">
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+    <div>
+        <div class="form-group">
+            <label asp-for="Id">Номер ID</label>
+            <input type="text" asp-for="Id" />
+            <span asp-validation-for="Id" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Ввод" class="btn btn-outline-dark" />
+        </div>
+    </div>
+</form>

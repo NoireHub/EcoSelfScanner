@@ -6,12 +6,28 @@
     <div class="validation" asp-validation-summary="ModelOnly"></div>
     <div>
         <div class="form-group">
-            <label asp-for="Id">Номер ID</label>
-            <input type="text" asp-for="Id" />
-            <span asp-validation-for="Id" />
+            <label asp-for="BarCode">BarCode</label>
+            <input type="text" asp-for="BarCode" />
+            <span asp-validation-for="BarCode" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input type="text" asp-for="Name" />
+            <span asp-validation-for="Name" />
+        </div>
+        <div class="form-group">
+            <label asp-for="RecycMatr">RecycMatr</label>
+            <input type="text" asp-for="RecycMatr" />
+            <span asp-validation-for="RecycMatr" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Desc">Desc</label>
+            <input type="text" asp-for="Desc" />
+            <span asp-validation-for="Desc" />
         </div>
         <div class="form-group">
             <input type="submit" value="Ввод" class="btn btn-outline-dark" />
         </div>
     </div>
 </form>
+
