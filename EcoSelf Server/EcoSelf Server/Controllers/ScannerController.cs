@@ -22,7 +22,6 @@ namespace EcoSelf_Server.Controllers
 
         public JsonResult SendJson(string BarCode)
         {
-
             var products = from m in db.Products select m;
 
             if (!String.IsNullOrEmpty(BarCode))
