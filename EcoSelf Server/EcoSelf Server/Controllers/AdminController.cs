@@ -42,37 +42,6 @@ namespace EcoSelf_Server.Controllers
             }
             return View(model);
         }
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                User user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
-                if (user == null)
-                {
-                    // добавляем пользователя в бд
-                    db.Users.Add(new User { Email = model.Email, Password = model.Password });
-                    await db.SaveChangesAsync();
-
-                    await Authenticate(model.Email); // аутентификация
-
-                    return RedirectToAction("Index", "Scanner");
-                }
-                else
-                    ModelState.AddModelError("", "Некорректные логин и(или) пароль");
-            }
-            return View(model);
-        }
-        /*public IActionResult Index()
-        {
-            return View();
-        }*/
         public async Task<IActionResult> Index()
         {
             if (User.Identity.IsAuthenticated)
@@ -122,10 +91,6 @@ namespace EcoSelf_Server.Controllers
             }
             return Content("Войдите в систему");
         }
-        /* public IActionResult Delete()
-         {
-             return View();
-         }*/
         [HttpGet]
         [ActionName("Delete")]
         public async Task<IActionResult> ConfirmDelete(int? id)
