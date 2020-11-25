@@ -75,11 +75,19 @@ namespace EcoSelf_Server.Controllers
         }*/
         public async Task<IActionResult> Index()
         {
-            return View(await db.Products.ToListAsync());
+            if (User.Identity.IsAuthenticated)
+            {
+                return View(await db.Products.ToListAsync());
+            }
+            return Content("Неправильный логин или пароль");
         }
         public IActionResult Add()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            return Content("Войдите в систему");
         }
         [HttpPost]
         public async Task<IActionResult> AddAsync(Product product)
@@ -90,20 +98,29 @@ namespace EcoSelf_Server.Controllers
         }
         public async Task<IActionResult> EditAsync(int? Id)
         {
-            if (Id != null)
+            if (User.Identity.IsAuthenticated)
             {
-                Product product = await db.Products.FirstOrDefaultAsync(p => p.Id == Id);
-                if (product != null)
-                    return View(product);
+                if (Id != null)
+                {
+                    Product product = await db.Products.FirstOrDefaultAsync(p => p.Id == Id);
+                    if (product != null)
+                        return View(product);
+                }
+                return NotFound();
             }
-            return NotFound();
+            return Content("Войдите в систему");
+
         }
         [HttpPost]
         public async Task<IActionResult> Edit(Product product)
         {
-            db.Products.Update(product);
-            await db.SaveChangesAsync();
-            return RedirectToAction("edit");
+            if (User.Identity.IsAuthenticated)
+            {
+                db.Products.Update(product);
+                await db.SaveChangesAsync();
+                return RedirectToAction("edit");
+            }
+            return Content("Войдите в систему");
         }
         /* public IActionResult Delete()
          {
@@ -113,29 +130,37 @@ namespace EcoSelf_Server.Controllers
         [ActionName("Delete")]
         public async Task<IActionResult> ConfirmDelete(int? id)
         {
-            if (id != null)
+            if (User.Identity.IsAuthenticated)
             {
-                Product product = await db.Products.FirstOrDefaultAsync(p => p.Id == id);
-                if (product != null)
-                    return View(product);
+                if (id != null)
+                {
+                    Product product = await db.Products.FirstOrDefaultAsync(p => p.Id == id);
+                    if (product != null)
+                        return View(product);
+                }
+                return NotFound();
             }
-            return NotFound();
+            return Content("Войдите в систему");
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id != null)
+            if (User.Identity.IsAuthenticated)
             {
-                Product product = await db.Products.FirstOrDefaultAsync(p => p.Id == id);
-                if (product != null)
+                if (id != null)
                 {
-                    db.Products.Remove(product);
-                    await db.SaveChangesAsync();
-                    return RedirectToAction("Index");
+                    Product product = await db.Products.FirstOrDefaultAsync(p => p.Id == id);
+                    if (product != null)
+                    {
+                        db.Products.Remove(product);
+                        await db.SaveChangesAsync();
+                        return RedirectToAction("Index");
+                    }
                 }
+                return NotFound();
             }
-            return NotFound();
+            return Content("Войдите в систему");
         }
         /*   public async Task<IActionResult> Add(AddModel model)
            {
